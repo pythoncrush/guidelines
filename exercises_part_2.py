@@ -43,10 +43,53 @@ print(mutual_exclusion_of_sets)
 #word count total: <n>
 #Big Boi:
 #word count total: <n>
+bb_dict = {}
+ad_dict = {}
+ch_dict = {}
+current_artist = None
 
-with open('southernplaya_lyrics.txt', 'r') as f:
+with open("southernplaya_lyrics.txt", "r") as f:
     for line in f:
-    	print(f"current line is {line}")
+        regex_match = re.search(r"^\[(Verse|Chorus)(\s|:)(\d|\s)(Choir|:\s.*)]", line)
+        if regex_match:
+            current_artist = regex_match.group(4)
+            continue
+        
+        for word in line.split():
+            no_punct_word = re.sub(r"[^a-zA-Z0-9\s]", "", word)
+            
+            if "Big Boi" in current_artist:
+                if no_punct_word in bb_dict:
+                    bb_dict[no_punct_word] = bb_dict[no_punct_word] + 1
+                else:
+                    bb_dict[no_punct_word] = 1
+
+            if "3000" in current_artist:
+                if no_punct_word in ad_dict:
+                    ad_dict[no_punct_word] = ad_dict[no_punct_word] + 1
+                else:
+                    ad_dict[no_punct_word] = 1
+
+            if "Choir" in current_artist:
+                if no_punct_word in ch_dict:
+                    ch_dict[no_punct_word] = ch_dict[no_punct_word] + 1
+                else:
+                    ch_dict[no_punct_word] = 1
+
+    # Total Big Boi
+    print(f"Whole dictionary for Big Boi word counts {bb_dict.items()}")
+    print(f"Unique words Big Boi {len(bb_dict.keys())}")
+    print(f"Total words overall Big Boi including duplicates {sum(bb_dict.values())}")
+    print(f"Words over 4 characters for Big Boi")
+
+
+    # # Total Andre
+    print(f"Unique words Andre {len(ad_dict.keys())}")
+    print(f"Total words overall Andre including duplicates {sum(ad_dict.values())}")
+
+    # # Total Chorus
+    print(f"Unique words Chorus {len(ch_dict.keys())}")
+    print(f"Total words overall Chorus including duplicates {sum(ch_dict.values())}")
 
 #2
 #Extend solution to #1 by counting unique words
