@@ -50,8 +50,7 @@ current_artist = None
 
 with open("southernplaya_lyrics.txt", "r") as f:
     for line in f:
-        regex_match = re.search(r"^\[(Verse|Chorus)(\s|:)(\d|\s)(Choir|:\s.*)]", line)
-        if regex_match:
+        if regex_match := re.search(r".*:\s(.*)\]$", line)
             current_artist = regex_match.group(4)
             continue
         
