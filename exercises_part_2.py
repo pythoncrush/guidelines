@@ -1,3 +1,4 @@
+import re
 #New collection data type called set
 #Sets are declared with {} or set() syntax
 this_is_a_set = {'a','b','c','d','e','f','g',1,2,3,4}
@@ -50,7 +51,7 @@ current_artist = None
 
 with open("southernplaya_lyrics.txt", "r") as f:
     for line in f:
-        if regex_match := re.search(r".*:\s(.*)\]$", line)
+        if regex_match := re.search(r".*:\s(.*)\]$", line):
             current_artist = regex_match.group(4)
             continue
         
