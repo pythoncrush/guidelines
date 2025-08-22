@@ -52,7 +52,7 @@ current_artist = None
 with open("southernplaya_lyrics.txt", "r") as f:
     for line in f:
         if regex_match := re.search(r".*:\s(.*)\]$", line):
-            current_artist = regex_match.group(4)
+            current_artist = regex_match.group(1)
             continue
         
         for word in line.split():
